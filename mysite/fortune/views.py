@@ -1,18 +1,25 @@
-from django.shortcuts import render
 from django.http import HttpResponse
-from django.template import loader
-from django.http import Http404
+from django.views import generic
 
+from .forms import FortuneForm
 from .models import Fortune
 
-def index(request):
-    latest_fortune_list = Fortune.objects.order_by('-pub_date')[:30]
-    context = {'latest_fortune_list': latest_fortune_list}
-    return render(request, 'fortune/index.html', context)
+class IndexView(generic.ListView):
+    template_name = 'fortune/index.html'
+    context_object_name = 'latest_fortune_list'
 
-def detail(request, fortune_id):
-    try:
-        fortune = Fortune.objects.get(pk=fortune_id)
-    except Fortune.DoesNotExist:
-        raise Http404("Fortune does not exist")
-    return render(request, 'fortune/detail.html', {'fortune': fortune})
+    def get_queryset(self):
+        return Fortune.objects.order_by('-pub_date')[:30]
+
+class DetailView(generic.DetailView):
+    model = Fortune
+    template_name = 'fortune/detail.html'
+
+class FortuneCreate(generic.CreateView):
+    model = Fortune
+    form_class = FortuneForm
+    succes_url = '/'
+    template_name = 'fortune/new.html'
+    def form_valid(self, form):
+        form.save()
+        return super(FortuneCreate, self).form_valid(form)

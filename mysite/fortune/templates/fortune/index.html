@@ -1,3 +1,5 @@
+<h1>Latest Fortunes</h1>
+<button type="button"><a href="{% url 'fortune:new' %}">Create a new fortune</a></button>
 {% if latest_fortune_list %}
     <ul>
     {% for fortune in latest_fortune_list %}
