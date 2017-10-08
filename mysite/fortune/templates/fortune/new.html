@@ -1,5 +1,5 @@
 <h1>Create your fortune</h1>
-<button type="button"><a href="{% url 'fortune:index' %}">Retour au menu</a></button>
+<button type="button"><a href="{% url 'fortune:index' %}">Back to menu</a></button>
 <form action="" method=post>
 	{% csrf_token %}
 	{{ form.as_p }}

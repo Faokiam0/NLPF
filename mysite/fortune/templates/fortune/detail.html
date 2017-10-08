@@ -1,6 +1,6 @@
 <h1>{{fortune.title}}</h1>
 
-<button type="button"><a href="{% url 'fortune:index' %}">Retour au menu</a></button>
+<button type="button"><a href="{% url 'fortune:index' %}">Back to menu</a></button>
 <div>
 <form action="{% url 'fortune:up' fortune.id %}" method="post">
 	{% csrf_token %}

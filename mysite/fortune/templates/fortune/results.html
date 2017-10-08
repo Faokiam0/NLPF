@@ -1,9 +1,12 @@
-<h1>{{ question.question_text }}</h1>
-
-<ul>
-{% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-{% endfor %}
-</ul>
-
-<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+<h1>Top 30 Fortune</h1>
+<button type="button"><a href="{% url 'fortune:new' %}">Create a new fortune</a></button>
+<button type="button"><a href="{% url 'fortune:index' %}">Back to menu</a></button>
+{% if latest_fortune_list %}
+    <ul>
+    {% for fortune in latest_fortune_list %}
+        <li><h3>Score: {{fortune.score}}</h3><a href="{% url 'fortune:detail' fortune.id %}">{{ fortune.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Fortune are available.</p>
+{% endif %}
