@@ -20,10 +20,11 @@ class DetailView(generic.DetailView):
 class FortuneCreate(generic.FormView):
     model = Fortune
     form_class = FortuneForm
+    success_url = '/fortune/'
     template_name = 'fortune/new.html'
     def form_valid(self, form):
-        form.instance.pup_date = datetime.now
-        form.save()
+        self.object = form.save(commit=True)
+        self.object.score = 0
+        self.object.pub_date = datetime.now()
+        self.object.save()
         return super(FortuneCreate, self).form_valid(form)
-    def get_success_url(self):
-        return reverse('myurlname', args=(title,))

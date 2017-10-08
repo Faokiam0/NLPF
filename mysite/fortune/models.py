@@ -11,5 +11,3 @@ class Fortune(models.Model):
     score = models.IntegerField(default=0)
     def __str__(self):
         return self.title
-    def get_absolute_url(self):
-        return ('myurlname', (), {'myparam': title})
