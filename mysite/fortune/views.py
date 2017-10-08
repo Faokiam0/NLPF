@@ -2,6 +2,9 @@ from django.http import HttpResponse
 from django.views import generic
 from django.utils import timezone
 from datetime import datetime
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from .forms import FortuneForm
 from .models import Fortune
@@ -28,3 +31,15 @@ class FortuneCreate(generic.FormView):
         self.object.pub_date = datetime.now()
         self.object.save()
         return super(FortuneCreate, self).form_valid(form)
+
+def up(request, fortune_id):
+    fortune = get_object_or_404(Fortune, pk=fortune_id)
+    fortune.score += 1
+    fortune.save()
+    return HttpResponseRedirect(reverse('fortune:detail', args=(fortune.id,)))
+
+def down(request, fortune_id):
+    fortune = get_object_or_404(Fortune, pk=fortune_id)
+    fortune.score -= 1
+    fortune.save()
+    return HttpResponseRedirect(reverse('fortune:detail', args=(fortune.id,)))

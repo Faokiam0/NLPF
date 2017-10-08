@@ -1,8 +1,17 @@
 <h1>{{fortune.title}}</h1>
+
 <button type="button"><a href="{% url 'fortune:index' %}">Retour au menu</a></button>
-<p>
-<button type="button">+</button><h1>{{fortune.score}}</h1><button type="button">-</button>
-</p>
+<div>
+<form action="{% url 'fortune:up' fortune.id %}" method="post">
+	{% csrf_token %}
+<input type="submit" value="+"></button>
+</form>
+<h1>{{fortune.score}}</h1>
+<form action="{% url 'fortune:down' fortune.id %}" method="post">
+	{% csrf_token %}
+<input type="submit" value="-"></button>
+</form>
+</div>
 <ul>
     <li>{{fortune.text}}
     <li>{{fortune.pub_date}}</li>

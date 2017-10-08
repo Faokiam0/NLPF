@@ -6,5 +6,7 @@ app_name = 'fortune'
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
-    url(r'^new/$', views.FortuneCreate.as_view(), name='new')
+    url(r'^new/$', views.FortuneCreate.as_view(), name='new'),
+    url(r'^(?P<fortune_id>[0-9]+)/up/$', views.up, name='up'),
+    url(r'^(?P<fortune_id>[0-9]+)/down/$', views.down, name='down'),
 ]
