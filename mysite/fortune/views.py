@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 from django.views import generic
+from django.utils import timezone
+from datetime import datetime
 
 from .forms import FortuneForm
 from .models import Fortune
@@ -15,11 +17,13 @@ class DetailView(generic.DetailView):
     model = Fortune
     template_name = 'fortune/detail.html'
 
-class FortuneCreate(generic.CreateView):
+class FortuneCreate(generic.FormView):
     model = Fortune
     form_class = FortuneForm
-    succes_url = '/'
     template_name = 'fortune/new.html'
     def form_valid(self, form):
+        form.instance.pup_date = datetime.now
         form.save()
         return super(FortuneCreate, self).form_valid(form)
+    def get_success_url(self):
+        return reverse('myurlname', args=(title,))
