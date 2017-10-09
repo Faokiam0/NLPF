@@ -20,4 +20,4 @@ GRANT ALL PRIVILEGES ON pollsdb.* TO 'ODBC'@'localhost';
 FLUSH PRIVILEGES;  
 
 # Pour Robin
-Le projet contient un tutoriel dans le répertoire /sondage qui nous a permis de prendre en main django et d'apprendre le python. Et dans l'autre répertoire /mysite nous avons codé le projet Fortune.
+Le projet contient un tutoriel dans le répertoire /sondage qui nous a permis de prendre en main django et d'apprendre le python. Et dans l'autre répertoire /mysite où nous avons codé le projet Fortune.
