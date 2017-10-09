@@ -1,18 +1,50 @@
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
 <h1>{{fortune.title}}</h1>
 
-<button type="button"><a href="{% url 'fortune:index' %}">Back to menu</a></button>
-<div>
+<nav class="navbar navbar-default">
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+			<li><a href="{% url 'fortune:index' %}">Menu</a></li>
+			<li><a href="{% url 'fortune:new' %}">Create a new fortune</a></li>
+			<li><a href="{% url 'fortune:results' %}">Top 30</a></li>
+		</ul>
+	</div>
+</nav>
+
+<table>
+	</tr>
+	<td>
 <form action="{% url 'fortune:up' fortune.id %}" method="post">
 	{% csrf_token %}
-<input type="submit" value="+"></button>
+	{% buttons %}
+	<button type="submit">+</button>
+	{% endbuttons %}
 </form>
-<h1>{{fortune.score}}</h1>
+	</td>
+		<td><p>Score: {{ fortune.score }}</p></td>
+	<td>
 <form action="{% url 'fortune:down' fortune.id %}" method="post">
 	{% csrf_token %}
-<input type="submit" value="-"></button>
+	{% buttons %}
+	<button type="submit">-</button>
+	{% endbuttons %}
 </form>
+	</td>
+	</tr>
+</table>
+
+<div class="jumbotron">
+	<div class="col-lg-offset-1">
+    <p>{{fortune.text}}</p>
+	</div>
 </div>
-<ul>
-    <li>{{fortune.text}}
-    <li>{{fortune.pub_date}}</li>
-</ul>
+<li>{{fortune.pub_date}}</li>
