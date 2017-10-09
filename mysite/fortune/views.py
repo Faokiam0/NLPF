@@ -43,12 +43,16 @@ class FortuneCreate(generic.FormView):
 def up(request, fortune_id):
     fortune = get_object_or_404(Fortune, pk=fortune_id)
     fortune.score += 1
+    if request.user.is_authenticated:
+        fortune.score += 1
     fortune.save()
     return HttpResponseRedirect(reverse('fortune:detail', args=(fortune.id,)))
 
 def down(request, fortune_id):
     fortune = get_object_or_404(Fortune, pk=fortune_id)
     fortune.score -= 1
+    if request.user.is_authenticated:
+        fortune.score -= 1
     fortune.save()
     return HttpResponseRedirect(reverse('fortune:detail', args=(fortune.id,)))
 
