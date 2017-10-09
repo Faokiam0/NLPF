@@ -27,16 +27,16 @@
 <form action="{% url 'fortune:up' fortune.id %}" method="post">
 	{% csrf_token %}
 	{% buttons %}
-	<button type="submit">+</button>
+	<button type="submit" class="btn btn-success">+</button>
 	{% endbuttons %}
 </form>
 	</td>
-		<td><p>Score: {{ fortune.score }}</p></td>
+		<td><p style="padding-left:5px; padding-right:5px;">Score: {{ fortune.score }}</p></td>
 	<td>
 <form action="{% url 'fortune:down' fortune.id %}" method="post">
 	{% csrf_token %}
 	{% buttons %}
-	<button type="submit">-</button>
+	<button type="submit" class="btn btn-danger">-</button>
 	{% endbuttons %}
 </form>
 	</td>

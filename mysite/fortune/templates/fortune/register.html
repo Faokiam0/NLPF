@@ -1,0 +1,26 @@
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+<h1>Register</h1>
+<nav class="navbar navbar-default">
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+			<li><a href="{% url 'fortune:index' %}">Menu</a></li>
+			<li><a href="{% url 'fortune:new' %}">Create a new fortune</a></li>
+			<li><a href="{% url 'fortune:results' %}">Top 30</a></li>
+			<li><a href="{% url 'fortune:connect' %}">Log in</a></li>
+		</ul>
+	</div>
+</nav>
+<form action="" method=post>
+	{% csrf_token %}
+	{% bootstrap_form form %}
+	<p><input type="submit" value="Save"></p>
+</form>

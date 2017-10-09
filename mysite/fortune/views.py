@@ -6,8 +6,9 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 
-from .forms import FortuneForm, ConnexionForm
+from .forms import FortuneForm, ConnexionForm, RegisterForm
 from .models import Fortune
 
 class IndexView(generic.ListView):
@@ -64,10 +65,10 @@ def connect(request):
         if form.is_valid():
             username = form.cleaned_data["username"]
             password = form.cleaned_data["password"]
-            user = authenticate(username=username, password=password)  # Nous vérifions si les données sont correctes
-            if user:  # Si l'objet renvoyé n'est pas None
-                login(request, user)  # nous connectons l'utilisateur
-            else: # sinon une erreur sera affichée
+            user = authenticate(username=username, password=password)
+            if user:
+                login(request, user)
+            else:
                 error = True
     else:
         form = ConnexionForm()
@@ -77,3 +78,21 @@ def connect(request):
 def deconnect(request):
     logout(request)
     return HttpResponseRedirect(reverse('fortune:connect'))
+
+def register(request):
+    error = False
+
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            email = form.cleaned_data["email"]
+            password = form.cleaned_data["password"]
+            user = User.objects.create_user(username, email,password)
+            if user:
+                login(request, user)
+            else:
+                error = True
+    else:
+        form = ConnexionForm()
+    return render(request, 'fortune/register.html', locals())

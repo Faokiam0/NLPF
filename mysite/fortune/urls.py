@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^(?P<fortune_id>[0-9]+)/down/$', views.down, name='down'),
     url(r'^connect/$', views.connect, name='connect'),
     url(r'^deconnect/$', views.deconnect, name='deconnect'),
+    url(r'^register/$', views.register, name='register'),
 ]
