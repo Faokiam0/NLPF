@@ -8,7 +8,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
-from .forms import FortuneForm, ConnexionForm, RegisterForm
+from .forms import FortuneForm, ConnexionForm
 from .models import Fortune
 
 class IndexView(generic.ListView):
@@ -83,12 +83,11 @@ def register(request):
     error = False
 
     if request.method == "POST":
-        form = RegisterForm(request.POST)
+        form = ConnexionForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data["username"]
-            email = form.cleaned_data["email"]
             password = form.cleaned_data["password"]
-            user = User.objects.create_user(username, email,password)
+            user = User.objects.create_user(username, username,password)
             if user:
                 login(request, user)
             else:

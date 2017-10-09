@@ -19,8 +19,13 @@
 		</ul>
 	</div>
 </nav>
+{% if user.is_authenticated %}
+<h2>You are connected, {{ user.username }} !</h2>
+<button><a href="{% url 'fortune:deconnect' %}">Log out</a></button>
+{% else %}
 <form action="" method=post>
 	{% csrf_token %}
 	{% bootstrap_form form %}
 	<p><input type="submit" value="Save"></p>
 </form>
+{% endif %}
