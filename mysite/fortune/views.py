@@ -34,7 +34,10 @@ class UserFortuneView(generic.ListView):
     context_object_name = 'list'
 
     def get_queryset(self):
-        return Fortune.objects.filter(user=self.request.user).order_by('-pub_date')
+        if self.request.user.is_authenticated:
+            return Fortune.objects.filter(user=self.request.user).order_by('-pub_date')
+        else:
+            return
 
 class FortuneCreate(generic.FormView):
     model = Fortune
