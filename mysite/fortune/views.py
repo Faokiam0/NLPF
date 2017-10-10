@@ -36,6 +36,8 @@ class FortuneCreate(generic.FormView):
     template_name = 'fortune/new.html'
     def form_valid(self, form):
         self.object = form.save(commit=True)
+        if self.request.user.is_authenticated:
+            self.object.user = self.request.user
         self.object.score = 0
         self.object.pub_date = datetime.now()
         self.object.save()

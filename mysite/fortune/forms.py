@@ -1,6 +1,5 @@
 from django import forms
 from .models import Fortune
-from django.contrib.auth.models import User
 
 class FortuneForm(forms.ModelForm):
     class Meta:
