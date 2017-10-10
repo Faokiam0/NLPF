@@ -17,6 +17,7 @@
 			<li><a href="{% url 'fortune:results' %}">Top 30</a></li>
 			{% if user.is_authenticated %}
 			<li class="active"><a href="{% url 'fortune:deconnect' %}">Log out</a></li>
+			<li><a href="{% url 'fortune:myFortunes' %}">My Fortunes</a></li>
 			{% else %}
 			<li class="active"><a href="{% url 'fortune:connect' %}">Log in</a></li>
 			{% endif %}

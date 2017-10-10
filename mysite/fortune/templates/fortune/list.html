@@ -12,11 +12,12 @@
 <nav class="navbar navbar-default">
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
-			<li class="active"><a href="{% url 'fortune:index' %}">Menu</a></li>
+			<li><a href="{% url 'fortune:index' %}">Menu</a></li>
 			<li><a href="{% url 'fortune:new' %}">Create a new fortune</a></li>
 			<li><a href="{% url 'fortune:results' %}">Top 30</a></li>
 			{% if user.is_authenticated %}
 			<li><a href="{% url 'fortune:deconnect' %}">Log out</a></li>
+			<li class="active"><a href="{% url 'fortune:myFortunes' %}">My Fortunes</a></li>
 			{% else %}
 			<li><a href="{% url 'fortune:connect' %}">Log in</a></li>
 			{% endif %}
