@@ -25,6 +25,15 @@ class TopView(generic.ListView):
     def get_queryset(self):
         return Fortune.objects.order_by('-score')[:30]
 
+class UserFortuneView(generic.ListView) :
+    #user_name =
+    template_name = 'fortune/results.html'
+    context_object_name = 'latest_fortune_list'
+
+    def get_queryset(self):
+        return Fortune.objects.order_by('-pub_date')
+        #return Fortune.objects.order_by('-pub_date', {'user_id': user_name})
+
 class DetailView(generic.DetailView):
     model = Fortune
     template_name = 'fortune/detail.html'
