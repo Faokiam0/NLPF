@@ -29,6 +29,13 @@ class DetailView(generic.DetailView):
     model = Fortune
     template_name = 'fortune/detail.html'
 
+class UserFortuneView(generic.ListView):
+    template_name = 'fortune/list.html'
+    context_object_name = 'list'
+
+    def get_queryset(self):
+        return Fortune.objects.filter(user=self.request.user).order_by('-pub_date')
+
 class FortuneCreate(generic.FormView):
     model = Fortune
     form_class = FortuneForm

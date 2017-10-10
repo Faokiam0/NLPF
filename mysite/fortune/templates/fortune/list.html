@@ -1,0 +1,42 @@
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+<div>
+<h1>Fortune</h1>
+<nav class="navbar navbar-default">
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+			<li class="active"><a href="{% url 'fortune:index' %}">Menu</a></li>
+			<li><a href="{% url 'fortune:new' %}">Create a new fortune</a></li>
+			<li><a href="{% url 'fortune:results' %}">Top 30</a></li>
+			{% if user.is_authenticated %}
+			<li><a href="{% url 'fortune:deconnect' %}">Log out</a></li>
+			{% else %}
+			<li><a href="{% url 'fortune:connect' %}">Log in</a></li>
+			{% endif %}
+		</ul>
+	</div>
+</nav>
+</div>
+<div>
+{% if list %}
+	<ul>
+    {% for fortune in list %}
+        <h2><li><a href="{% url 'fortune:detail' fortune.id %}">{{ fortune.title }}</a></li></h2>
+	<div class="jumbotron">
+	<div class="col-lg-offset-1">
+		<p>{{ fortune.text }}</p>
+	</div>
+	</div>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No Fortune are available.</p>
+{% endif %}
+</div>
