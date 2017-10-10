@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^connect/$', views.connect, name='connect'),
     url(r'^deconnect/$', views.deconnect, name='deconnect'),
     url(r'^register/$', views.register, name='register'),
+    url(r'^myFortunes/$', views.UserFortuneView, name='myFortunes')
 ]
